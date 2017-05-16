@@ -1,4 +1,4 @@
-/*function validateForm(){
+function validateForm(){
    var emailValido = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
    var soloLetras = /^[A-Za-z\_\-\.\s\xF1\xD1]+$/;
 
@@ -7,27 +7,42 @@
    var correo = document.getElementById("input-email").value;
    var pass = document.getElementById("input-password").value;
    var seleccion = document.getElementsByClassName("form-control").value;
+
+if(Validador.soloTexto(nombre)){
+   quitarInfo("name");
+}else{
+   alertInfo("name", "Nombre no es válido");
 }
-function validarNombre(){
-    if (nombre.length === 0){ 
-      var requeridoNombre = document.getElementsByClassName("input-box");
-      var spanName = document.createElement("span");
-      var nombreChild = document.createTextNode("Campo obligatorio");
-      spanName.appendChild(nombreChild);
-      requeridoNombre.appendChild(spanName);
-      return nombreChild;
-    }
+if(Validador.soloTexto(apellido)){
+   quitarInfo("apellido");
+}else{
+   alertInfo("apellido", "Ingresa un apellido válido");
 }
 
-function validarApellido(){
-   if apellido === "" || apellido === undefined {
-      var requeridoApellido = document.getElementsByClassName("input-box")[0]
-      var spanLN = document.createElement("span");
-      var apellidoChild = document.createTextNode("Campo obligatorio. Solo letras");
-      spanLN.appendChild(apellidoChild);
-      requeridoApellido.appendChild(spanLN);
-      return apellidoChild;
+
+
+function quitarInfo(idInput){
+   var el =document.getElementById(idInput);
+   if(el.nextSibling != null){
+      el.parentNode.removeChild(el.nextSibling);
+   }
 }
-}*/
 
+function alertInfo(idInput, info){
+   var el = document.getElementById(idInput);
+   if(el.nextSibling == null){
+      var span = document.createElement("span");
+      span.innerHTML = info;
+      el.parentNode.appendChild(span);
+   }else if(el.nextSibling.tagName =="SPAN"){
+      el.nextSibling.innerHTML = info;
+      }else{
+        el.parentNode.removeChild(el.nextSibling);
 
+      var span = document.createElement("span");
+      span.innerHTML = info;
+      el.parentNode.appendChild(span);
+      }
+
+   }
+}
